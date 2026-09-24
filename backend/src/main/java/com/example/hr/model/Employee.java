@@ -1,23 +1,47 @@
 package com.example.hr.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class Employee {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String role;
+
+    @NotBlank
+    @Size(max = 100)
+    private String firstName;
+
+    @NotBlank
+    @Size(max = 100)
+    private String lastName;
+
+    @Email
+    @NotBlank
+    @Column(unique = true)
+    private String email;
+
+    @NotBlank
+    private String department;
+
+    @Min(0)
+    private Integer yearsOfExperience;
 
     public Employee() {}
-    public Employee(String name, String role) { this.name = name; this.role = role; }
+
+    // getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getDepartment() { return department; }
+    public void setDepartment(String department) { this.department = department; }
+    public Integer getYearsOfExperience() { return yearsOfExperience; }
+    public void setYearsOfExperience(Integer yearsOfExperience) { this.yearsOfExperience = yearsOfExperience; }
 }
